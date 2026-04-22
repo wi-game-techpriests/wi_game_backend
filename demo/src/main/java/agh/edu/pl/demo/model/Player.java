@@ -18,6 +18,13 @@ public class Player {
     private int wordSearchPoints = 0;
     private int kahootPoints = 0;
 
+    public Player(Session session, String name) {
+        this.session = session;
+        this.name = name;
+    }
+
+    public Player(){}
+
     @ManyToOne
     @JoinColumn(name = "session_id")
     private Session session;

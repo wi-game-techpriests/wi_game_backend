@@ -50,6 +50,10 @@ public class Session {
         return endTime;
     }
 
+    public Set<Player> getPlayers() {
+        return players;
+    }
+
     public void setEndTime(LocalDateTime endTime) {
         this.endTime = endTime;
     }
