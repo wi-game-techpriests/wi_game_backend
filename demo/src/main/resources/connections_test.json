@@ -1,0 +1,14 @@
+[
+  {
+    "category": "aaaa",
+    "words": ["bbb","ccc","ddd","eee","fff"]
+  },
+  {
+    "category": "aaara",
+    "words": ["bbrb","ccrc","ddrd","eree","frff"]
+  },
+  {
+    "category": "a1aaa",
+    "words": ["bb1b","cc1c","dd1d","e11ee","f1ff"]
+  }
+]
