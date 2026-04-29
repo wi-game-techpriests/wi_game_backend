@@ -1,6 +1,7 @@
 package agh.edu.pl.demo.conf;
 
 import agh.edu.pl.demo.model.ConnectionsCategory;
+import agh.edu.pl.demo.model.FillInAnswer;
 import agh.edu.pl.demo.model.FillInEntry;
 import agh.edu.pl.demo.repos.ConnectionsCategoryRepository;
 import agh.edu.pl.demo.repos.FillInEntryRepository;
@@ -53,6 +54,14 @@ public class JsonLoadTestConfiguration {
             List<FillInEntry> fillInEntries =
                     objectMapper.readValue(jsonFile, new TypeReference<List<FillInEntry>>(){});
 
+
+            for (FillInEntry entry : fillInEntries) {
+                if (entry.getFragmentEntries() != null) {
+                    for (FillInAnswer answer : entry.getFragmentEntries()) {
+                        answer.setParentEntry(entry);
+                    }
+                }
+            }
 
             fillInEntryRepository.saveAll(fillInEntries);
 
