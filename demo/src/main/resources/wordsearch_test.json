@@ -1,0 +1,30 @@
+[
+  {
+    "word": "word",
+    "wordLength": 4
+  },
+  {
+    "word": "wordy",
+    "wordLength": 5
+  },
+  {
+    "word": "wordle",
+    "wordLength": 6
+  },
+  {
+    "word": "java",
+    "wordLength": 4
+  },
+  {
+    "word": "nullptr",
+    "wordLength": 7
+  },
+  {
+    "word": "log",
+    "wordLength": 3
+  },
+  {
+    "word": "cord",
+    "wordLength": 4
+  }
+]
