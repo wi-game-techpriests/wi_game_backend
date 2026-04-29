@@ -1,11 +1,9 @@
 package agh.edu.pl.demo.conf;
 
-import agh.edu.pl.demo.model.ConnectionsCategory;
-import agh.edu.pl.demo.model.FillInAnswer;
-import agh.edu.pl.demo.model.FillInEntry;
-import agh.edu.pl.demo.model.WordSearchWord;
+import agh.edu.pl.demo.model.*;
 import agh.edu.pl.demo.repos.ConnectionsCategoryRepository;
 import agh.edu.pl.demo.repos.FillInEntryRepository;
+import agh.edu.pl.demo.repos.KahootQuestionRepository;
 import agh.edu.pl.demo.repos.WordSearchWordRepository;
 import jakarta.annotation.PostConstruct;
 import org.springframework.context.annotation.Configuration;
@@ -24,13 +22,15 @@ public class JsonLoadTestConfiguration {
     private final ConnectionsCategoryRepository connectionsRepository;
     private final FillInEntryRepository fillInEntryRepository;
     private final WordSearchWordRepository wordSearchWordRepository;
+    private final KahootQuestionRepository kahootRepository;
 
     private final ObjectMapper objectMapper;
 
-    public JsonLoadTestConfiguration(ConnectionsCategoryRepository connectionsRepository, FillInEntryRepository fillInEntryRepository, WordSearchWordRepository wordSearchWordRepository, ObjectMapper objectMapper) {
+    public JsonLoadTestConfiguration(ConnectionsCategoryRepository connectionsRepository, FillInEntryRepository fillInEntryRepository, WordSearchWordRepository wordSearchWordRepository, KahootQuestionRepository kahootRepository, ObjectMapper objectMapper) {
         this.connectionsRepository = connectionsRepository;
         this.fillInEntryRepository = fillInEntryRepository;
         this.wordSearchWordRepository = wordSearchWordRepository;
+        this.kahootRepository = kahootRepository;
         this.objectMapper = objectMapper;
     }
 
@@ -87,6 +87,21 @@ public class JsonLoadTestConfiguration {
 
 
             wordSearchWordRepository.saveAll(words);
+
+
+        } catch (Exception e){
+            e.printStackTrace();
+        }
+
+
+        try{
+            File jsonFile = new File("src/main/resources/kahoot_test.json");
+
+            List<KahootQuestion> questions =
+                    objectMapper.readValue(jsonFile, new TypeReference<List<KahootQuestion>>(){});
+
+
+            kahootRepository.saveAll(questions);
 
 
         } catch (Exception e){

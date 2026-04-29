@@ -1,0 +1,23 @@
+[
+  {
+    "question": "dokąd nocą tupta jeż?",
+    "answer": "po jabko",
+    "otherChoices": [
+      "na grzyby",
+      "do urzędu",
+      "bo chce",
+      "a czemu sie pytasz?"
+    ]
+  },
+
+  {
+    "question": "jedyny prawdziwy majonez?",
+    "answer": "kielecki",
+    "otherChoices": [
+      "winiary",
+      "hellmans",
+      "heinz",
+      "aioli"
+    ]
+  }
+]
