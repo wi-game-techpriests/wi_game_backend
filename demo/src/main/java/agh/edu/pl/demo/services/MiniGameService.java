@@ -1,9 +1,12 @@
 package agh.edu.pl.demo.services;
 
 import agh.edu.pl.demo.model.ConnectionsCategory;
+import agh.edu.pl.demo.model.WordSearchWord;
 import agh.edu.pl.demo.repos.ConnectionsCategoryRepository;
+import agh.edu.pl.demo.repos.WordSearchWordRepository;
 import agh.edu.pl.demo.util.dto.CategoryDTO;
 import agh.edu.pl.demo.util.dto.ConnectionsDTO;
+import agh.edu.pl.demo.util.dto.WordSearchDTO;
 import org.springframework.stereotype.Service;
 
 import java.util.ArrayList;
@@ -14,9 +17,11 @@ import java.util.List;
 @Service
 public class MiniGameService {
     private final ConnectionsCategoryRepository connectionsRepository;
+    private final WordSearchWordRepository wordSearchRepository;
 
-    public MiniGameService(ConnectionsCategoryRepository connectionsRepository) {
+    public MiniGameService(ConnectionsCategoryRepository connectionsRepository, WordSearchWordRepository wordSearchRepository) {
         this.connectionsRepository = connectionsRepository;
+        this.wordSearchRepository = wordSearchRepository;
     }
 
 
@@ -45,4 +50,13 @@ public class MiniGameService {
                 );
 
     }
+
+    public WordSearchDTO getWordSearch(){
+
+        List<String> words = wordSearchRepository.findRandomWords()
+                .stream()
+                .map(WordSearchWord::getWord)
+                .toList();
+        return new WordSearchDTO(words);
+    };
 }
