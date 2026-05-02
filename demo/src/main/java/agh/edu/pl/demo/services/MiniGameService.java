@@ -1,12 +1,13 @@
 package agh.edu.pl.demo.services;
 
 import agh.edu.pl.demo.model.ConnectionsCategory;
+import agh.edu.pl.demo.model.FillInAnswer;
+import agh.edu.pl.demo.model.FillInEntry;
 import agh.edu.pl.demo.model.WordSearchWord;
 import agh.edu.pl.demo.repos.ConnectionsCategoryRepository;
+import agh.edu.pl.demo.repos.FillInEntryRepository;
 import agh.edu.pl.demo.repos.WordSearchWordRepository;
-import agh.edu.pl.demo.util.dto.CategoryDTO;
-import agh.edu.pl.demo.util.dto.ConnectionsDTO;
-import agh.edu.pl.demo.util.dto.WordSearchDTO;
+import agh.edu.pl.demo.util.dto.*;
 import org.springframework.stereotype.Service;
 
 import java.util.ArrayList;
@@ -18,10 +19,12 @@ import java.util.List;
 public class MiniGameService {
     private final ConnectionsCategoryRepository connectionsRepository;
     private final WordSearchWordRepository wordSearchRepository;
+    private final FillInEntryRepository fillInRepository;
 
-    public MiniGameService(ConnectionsCategoryRepository connectionsRepository, WordSearchWordRepository wordSearchRepository) {
+    public MiniGameService(ConnectionsCategoryRepository connectionsRepository, WordSearchWordRepository wordSearchRepository, FillInEntryRepository fillInRepository) {
         this.connectionsRepository = connectionsRepository;
         this.wordSearchRepository = wordSearchRepository;
+        this.fillInRepository = fillInRepository;
     }
 
 
@@ -58,5 +61,31 @@ public class MiniGameService {
                 .map(WordSearchWord::getWord)
                 .toList();
         return new WordSearchDTO(words);
-    };
+    }
+
+
+    public FillInEntryDTO getFillIn(){
+        FillInEntry fillInEntry = fillInRepository.findRandomFillInEntry();
+
+        List<FillInAnswer> fillInAnswers = fillInEntry.getFragmentEntries();
+
+        List<FillInAnswerDTO> answers = new ArrayList<>();
+        for(FillInAnswer a: fillInAnswers){
+            if(a.getPossibleAnswers().size()<=3){
+                FillInAnswerDTO answerDTO = new FillInAnswerDTO(a.getAnswerNumber(), a.getAnswer(),a.getPossibleAnswers());
+                answers.add(answerDTO);
+            } else {
+                //shuffle magic
+                List<String> possibleAnswers = new ArrayList<>(a.getPossibleAnswers());
+                Collections.shuffle(possibleAnswers);
+                FillInAnswerDTO answerDTO = new FillInAnswerDTO(a.getAnswerNumber(), a.getAnswer(),
+                        possibleAnswers.subList(0,3));
+                answers.add(answerDTO);
+            }
+        }
+
+
+        return new FillInEntryDTO(fillInEntry.getFragments(),answers);
+    }
+
 }

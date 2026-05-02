@@ -2,6 +2,7 @@ package agh.edu.pl.demo.presentaion;
 
 import agh.edu.pl.demo.services.MiniGameService;
 import agh.edu.pl.demo.util.dto.ConnectionsDTO;
+import agh.edu.pl.demo.util.dto.FillInEntryDTO;
 import agh.edu.pl.demo.util.dto.WordSearchDTO;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -30,5 +31,12 @@ public class MiniGamesController {
     public WordSearchDTO getWordSearch(){
         WordSearchDTO words = miniGameService.getWordSearch();
         return words;
+    }
+
+    @GetMapping("/fill_in")
+    public FillInEntryDTO getFillIn(){
+        FillInEntryDTO fillInEntry = miniGameService.getFillIn();
+
+        return fillInEntry;
     }
 }
