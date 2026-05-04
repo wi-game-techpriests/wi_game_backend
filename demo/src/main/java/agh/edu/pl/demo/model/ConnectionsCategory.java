@@ -13,6 +13,7 @@ public class ConnectionsCategory {
 
     private String category;
 
+    @ElementCollection
     private List<String> words;
 
     public Long getId() {

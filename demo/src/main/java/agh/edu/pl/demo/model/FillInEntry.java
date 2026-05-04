@@ -1,7 +1,7 @@
 package agh.edu.pl.demo.model;
 
+import com.fasterxml.jackson.annotation.JsonManagedReference;
 import jakarta.persistence.*;
-import org.hibernate.annotations.Type;
 
 import java.util.List;
 
@@ -13,9 +13,29 @@ public class FillInEntry {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
+    @ElementCollection
     private List<String> fragments;
-    private List<String> possibleAnswers;
-    private List<String> answers;
+
+    @OneToMany(mappedBy = "parentEntry", cascade = CascadeType.ALL)
+    @JsonManagedReference
+    private List<FillInAnswer> fragmentEntries;
+
+
+
+    public FillInEntry() {
+    }
+
+    public void setId(Long id) {
+        this.id = id;
+    }
+
+    public void setFragments(List<String> fragments) {
+        this.fragments = fragments;
+    }
+
+    public void setFragmentEntries(List<FillInAnswer> fragmentEntries) {
+        this.fragmentEntries = fragmentEntries;
+    }
 
     public Long getId() {
         return id;
@@ -25,11 +45,7 @@ public class FillInEntry {
         return fragments;
     }
 
-    public List<String> getPossibleAnswers() {
-        return possibleAnswers;
-    }
-
-    public List<String> getAnswers() {
-        return answers;
+    public List<FillInAnswer> getFragmentEntries() {
+        return fragmentEntries;
     }
 }
