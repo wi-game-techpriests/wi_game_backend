@@ -2,10 +2,7 @@ package agh.edu.pl.demo.model;
 
 import jakarta.persistence.*;
 
-import java.time.LocalDate;
 import java.time.LocalDateTime;
-import java.time.LocalTime;
-import java.util.HashMap;
 import java.util.HashSet;
 import java.util.Set;
 

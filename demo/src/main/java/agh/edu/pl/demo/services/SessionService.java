@@ -3,7 +3,6 @@ package agh.edu.pl.demo.services;
 
 import agh.edu.pl.demo.model.Session;
 import agh.edu.pl.demo.repos.SessionRepository;
-import jakarta.annotation.PostConstruct;
 import org.springframework.stereotype.Service;
 
 import java.util.List;

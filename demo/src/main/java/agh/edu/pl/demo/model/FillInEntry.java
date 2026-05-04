@@ -2,7 +2,6 @@ package agh.edu.pl.demo.model;
 
 import com.fasterxml.jackson.annotation.JsonManagedReference;
 import jakarta.persistence.*;
-import org.hibernate.annotations.Type;
 
 import java.util.List;
 
