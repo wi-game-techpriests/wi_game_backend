@@ -1,14 +1,14 @@
 [
   {
-    "word": "word",
+    "word": "icon",
     "wordLength": 4
   },
   {
-    "word": "wordy",
-    "wordLength": 5
+    "word": "haskell",
+    "wordLength": 7
   },
   {
-    "word": "wordle",
+    "word": "erlang",
     "wordLength": 6
   },
   {
@@ -16,15 +16,31 @@
     "wordLength": 4
   },
   {
-    "word": "nullptr",
-    "wordLength": 7
+    "word": "scala",
+    "wordLength": 5
   },
   {
-    "word": "log",
+    "word": "rust",
+    "wordLength": 4
+  },
+  {
+    "word": "julia",
+    "wordLength": 5
+  },
+  {
+    "word": "lua",
     "wordLength": 3
   },
   {
-    "word": "cord",
+    "word": "elixir",
+    "wordLength": 6
+  },
+  {
+    "word": "ruby",
     "wordLength": 4
+  },
+  {
+    "word": "fortran",
+    "wordLength": 7
   }
 ]
