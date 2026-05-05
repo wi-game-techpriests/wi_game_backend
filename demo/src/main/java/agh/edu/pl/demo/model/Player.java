@@ -13,17 +13,20 @@ public class Player {
 
     private String name;
 
+    private String token; // token required in requests
+
     private int connectionsPoint = 0;
     private int fillInPoints = 0;
     private int wordSearchPoints = 0;
     private int kahootPoints = 0;
 
-    public Player(Session session, String name) {
+    public Player(Session session, String name, String token) {
         this.session = session;
         this.name = name;
+        this.token = token;
     }
 
-    public Player(){}
+    public Player() {}
 
     @ManyToOne
     @JoinColumn(name = "session_id")
@@ -75,6 +78,14 @@ public class Player {
 
     public Long getId() {
         return id;
+    }
+
+    public String getToken() {
+        return this.token;
+    }
+
+    public void setToken(String token) {
+        this.token = token;
     }
 
 }

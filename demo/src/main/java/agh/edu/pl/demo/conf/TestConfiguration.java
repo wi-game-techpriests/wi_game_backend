@@ -25,8 +25,8 @@ public class TestConfiguration {
     private void init(){
         sessionRepository.deleteAll();
         playerRepository.deleteAll();
-        Session session = new Session(LocalDateTime.now(), LocalDateTime.now().plusHours(4));
-        Player player = new Player(session,"kotek");
+        Session session = new Session("Targi Pracy Kraków 2026", "ABCDEF", LocalDateTime.now(), LocalDateTime.now().plusHours(4));
+        Player player = new Player(session, "kotek", "token-kotek");
         sessionRepository.save(session);
         session.getPlayers().add(player);
         playerRepository.save(player);
