@@ -1,6 +1,7 @@
 package agh.edu.pl.demo.util.dto;
 
 import agh.edu.pl.demo.model.Player;
+import agh.edu.pl.demo.util.JWTUtil;
 
 public record PlayerDTO(Long id,
                         Long sessionId,
@@ -12,7 +13,7 @@ public record PlayerDTO(Long id,
                         int kahootPoints) {
     public static PlayerDTO playerToDTO(Player player) {
         return new PlayerDTO(player.getId(), player.getSession().getId(), player.getName(),
-                            player.getToken(), player.getConnectionsPoint(),
+                            JWTUtil.generateToken(player), player.getConnectionsPoint(),
                             player.getFillInPoints(), player.getWordSearchPoints(),
                             player.getKahootPoints());
     }

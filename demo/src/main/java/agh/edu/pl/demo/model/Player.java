@@ -2,6 +2,8 @@ package agh.edu.pl.demo.model;
 
 import jakarta.persistence.*;
 
+import java.util.UUID;
+
 @Entity
 @Table(name = "players", uniqueConstraints = {
         @UniqueConstraint(columnNames = {"name", "session_id"})
@@ -13,17 +15,23 @@ public class Player {
 
     private String name;
 
-    private String token; // token required in requests
+    private String tokenId; // token required in requests
 
     private int connectionsPoint = 0;
     private int fillInPoints = 0;
     private int wordSearchPoints = 0;
     private int kahootPoints = 0;
 
-    public Player(Session session, String name, String token) {
+    public Player(Session session, String name, String tokenId) {
         this.session = session;
         this.name = name;
-        this.token = token;
+        this.tokenId = tokenId;
+    }
+
+    public Player(Session session, String name){
+        this.session = session;
+        this.name = name;
+        this.tokenId = UUID.randomUUID().toString();
     }
 
     public Player() {}
@@ -81,11 +89,11 @@ public class Player {
     }
 
     public String getToken() {
-        return this.token;
+        return this.tokenId;
     }
 
     public void setToken(String token) {
-        this.token = token;
+        this.tokenId = tokenId;
     }
 
 }
