@@ -35,15 +35,13 @@ public class JWTUtil {
     }
 
 
-    public static void parseToken(String token){
-        Claims claims = Jwts.parser()
+    public static Claims parseToken(String token){
+        return Jwts.parser()
                 .setSigningKey(secret.getBytes())
                 .parseClaimsJws(token)
                 .getBody();
 
-        System.out.println("id: "+claims.getSubject());
-        System.out.println("name: " + claims.get("name", String.class));
-        System.out.println("sessionId: "+claims.get("sessionId", Long.class));
+
     }
 
 }
