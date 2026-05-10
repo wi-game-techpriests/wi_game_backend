@@ -1,8 +1,6 @@
 package agh.edu.pl.demo.presentaion;
 
 import agh.edu.pl.demo.services.AuthenticationService;
-import agh.edu.pl.demo.util.JWTUtil;
-import agh.edu.pl.demo.util.dto.ConnectionsDTO;
 import agh.edu.pl.demo.util.exceptions.InvalidHeaderFormatException;
 import agh.edu.pl.demo.util.exceptions.MissingTokenException;
 import io.jsonwebtoken.Claims;
@@ -30,7 +28,6 @@ public class AuthController {
     ){
 
         try {
-            // 4. Parse token
             Claims claims = authenticationService.authenticatePlayer(authHeader);
 
             Map<String, Object> response = new HashMap<>();
@@ -51,7 +48,7 @@ public class AuthController {
                     .body("Invalid Authorization header format. Expected 'Bearer <token>'");
         } catch (Exception e) {
             return ResponseEntity
-                    .status(401)
+                    .status(498)
                     .body("Invalid or expired token");
         }
     }

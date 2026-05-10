@@ -1,15 +1,19 @@
 package agh.edu.pl.demo.presentaion;
 
-import agh.edu.pl.demo.model.Player;
+
 import agh.edu.pl.demo.model.Session;
 import agh.edu.pl.demo.services.SessionService;
 import agh.edu.pl.demo.util.dto.PlayerDTO;
 import agh.edu.pl.demo.util.dto.SessionDTO;
+import agh.edu.pl.demo.util.exceptions.PlayerAlreadyExistsException;
+import agh.edu.pl.demo.util.exceptions.SessionExpiredException;
+import agh.edu.pl.demo.util.exceptions.SessionNotFoundException;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.time.LocalDateTime;
 import java.util.ArrayList;
-import java.util.HashSet;
+
 import java.util.List;
 
 @RestController
@@ -41,12 +45,32 @@ public class SessionController {
     }
 
     @PostMapping("/join")
-    public PlayerDTO joinSession(@RequestParam String code, @RequestParam String nick) {
-        return PlayerDTO.playerToDTO(this.sessionService.joinSession(code, nick));
+    public ResponseEntity<?> joinSession(@RequestParam String code, @RequestParam String nick) {
+        try {
+            return ResponseEntity.ok(PlayerDTO.playerToDTO(this.sessionService.joinSession(code, nick)));
+        } catch (SessionNotFoundException e) {
+            return ResponseEntity
+                    .status(404)
+                    .body("Session not found");
+        } catch (PlayerAlreadyExistsException e) {
+            return ResponseEntity
+                    .status(403)
+                    .body("Player with this name already exists in session");
+        } catch (SessionExpiredException e) {
+            return ResponseEntity
+                    .status(404)
+                    .body("Session expired");
+        }
     }
 
     @DeleteMapping
-    public SessionDTO deleteSession(@RequestParam Long id) {
-        return SessionDTO.sessionToDTO(this.sessionService.deleteSession(id));
+    public ResponseEntity<?> deleteSession(@RequestParam Long id) {
+        try {
+            return ResponseEntity.ok(SessionDTO.sessionToDTO(this.sessionService.deleteSession(id)));
+        } catch (SessionNotFoundException e) {
+            return ResponseEntity
+                    .status(404)
+                    .body("Session not found");
+        }
     }
 }

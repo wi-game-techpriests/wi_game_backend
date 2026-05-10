@@ -5,6 +5,9 @@ import agh.edu.pl.demo.model.Player;
 import agh.edu.pl.demo.model.Session;
 import agh.edu.pl.demo.repos.PlayerRepository;
 import agh.edu.pl.demo.repos.SessionRepository;
+import agh.edu.pl.demo.util.exceptions.PlayerAlreadyExistsException;
+import agh.edu.pl.demo.util.exceptions.SessionExpiredException;
+import agh.edu.pl.demo.util.exceptions.SessionNotFoundException;
 import org.springframework.stereotype.Service;
 
 import java.time.LocalDateTime;
@@ -34,17 +37,17 @@ public class SessionService {
         return this.sessionRepository.save(session);
     }
 
-    public Player joinSession(String code, String nickname) {
+    public Player joinSession(String code, String nickname) throws SessionNotFoundException, PlayerAlreadyExistsException, SessionExpiredException {
         Session session = sessionRepository.findByJoinCode(code)
-                        .orElseThrow(() -> new RuntimeException("Session not found"));
+                        .orElseThrow(SessionNotFoundException::new);
 
         if (session.getEndTime().isBefore(LocalDateTime.now())) {
-            throw new RuntimeException("Session expired");
+            throw new SessionExpiredException();
         }
 
         for (Player p : session.getPlayers()) {
             if (p.getName().equals(nickname)) {
-                throw new RuntimeException("This player already exists in this session");
+                throw new PlayerAlreadyExistsException();
             }
         }
 
@@ -57,9 +60,9 @@ public class SessionService {
         return sessionRepository.findAll();
     }
 
-    public Session deleteSession(Long id) {
+    public Session deleteSession(Long id) throws SessionNotFoundException {
         Session session = sessionRepository.findById(id)
-                .orElseThrow(() -> new RuntimeException("Session not found"));
+                .orElseThrow(SessionNotFoundException::new);
 
         sessionRepository.delete(session);
 
