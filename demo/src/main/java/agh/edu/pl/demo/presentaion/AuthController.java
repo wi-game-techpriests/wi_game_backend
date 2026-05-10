@@ -4,6 +4,8 @@ import agh.edu.pl.demo.services.AuthenticationService;
 import agh.edu.pl.demo.util.exceptions.InvalidHeaderFormatException;
 import agh.edu.pl.demo.util.exceptions.MissingTokenException;
 import io.jsonwebtoken.Claims;
+import jakarta.annotation.PostConstruct;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestHeader;
@@ -18,9 +20,12 @@ import java.util.Map;
 public class AuthController {
     private final AuthenticationService authenticationService;
 
+
     public AuthController(AuthenticationService authenticationService) {
         this.authenticationService = authenticationService;
     }
+
+
 
     @GetMapping("/parse")
     public ResponseEntity<?> parseToken(
@@ -29,6 +34,8 @@ public class AuthController {
 
         try {
             Claims claims = authenticationService.authenticatePlayer(authHeader);
+
+            if(claims == null) return ResponseEntity.ok("auth disabled");
 
             Map<String, Object> response = new HashMap<>();
             response.put("playerId", claims.getSubject());

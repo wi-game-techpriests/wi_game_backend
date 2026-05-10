@@ -7,6 +7,8 @@ import agh.edu.pl.demo.util.exceptions.InvalidHeaderFormatException;
 import agh.edu.pl.demo.util.exceptions.MissingTokenException;
 import agh.edu.pl.demo.util.exceptions.PlayerNotAuthenticatedException;
 import io.jsonwebtoken.Claims;
+import jakarta.annotation.PostConstruct;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Service;
 
 import java.util.Objects;
@@ -16,12 +18,23 @@ public class AuthenticationService {
 
     private final PlayerRepository playerRepository;
 
+    @Value("${auth.enabled}")
+    private boolean authEnabled;
+
+
     public AuthenticationService(PlayerRepository playerRepository) {
         this.playerRepository = playerRepository;
     }
 
+    @PostConstruct
+    private void init(){
+        System.out.println("%%%% AUTHENTICATION ENABLED: "+ authEnabled + " %%%%");
+    }
+
 
     public Claims authenticatePlayer(String authHeader) throws PlayerNotAuthenticatedException, MissingTokenException, InvalidHeaderFormatException {
+
+        if(!authEnabled) return null;
 
         try {
             if (authHeader == null || authHeader.isBlank()) {
