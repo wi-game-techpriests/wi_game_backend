@@ -92,7 +92,7 @@ public class Player {
         return this.tokenId;
     }
 
-    public void setToken(String token) {
+    public void setToken(String tokenId) {
         this.tokenId = tokenId;
     }
 

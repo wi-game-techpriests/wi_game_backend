@@ -4,8 +4,6 @@ import agh.edu.pl.demo.services.AuthenticationService;
 import agh.edu.pl.demo.util.exceptions.InvalidHeaderFormatException;
 import agh.edu.pl.demo.util.exceptions.MissingTokenException;
 import io.jsonwebtoken.Claims;
-import jakarta.annotation.PostConstruct;
-import org.springframework.beans.factory.annotation.Value;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestHeader;

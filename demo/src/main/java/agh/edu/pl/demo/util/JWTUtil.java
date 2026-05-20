@@ -19,6 +19,10 @@ public class JWTUtil {
     @Value("${auth.secret:secret}")
     private static String secret="secret01secret02secret03secret04";
 
+    private JWTUtil() {
+        throw new IllegalStateException("Utility class");
+    }
+
 
     public static String generateToken(Player player){
         return Jwts.builder()
@@ -36,8 +40,9 @@ public class JWTUtil {
 
 
     public static Claims parseToken(String token){
-        return Jwts.parser()
+        return Jwts.parserBuilder()
                 .setSigningKey(secret.getBytes())
+                .build()
                 .parseClaimsJws(token)
                 .getBody();
 
