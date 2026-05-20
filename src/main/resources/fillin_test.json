@@ -1,0 +1,78 @@
+[
+  {
+    "fragments": [
+      "adssasda",
+      "karolinka",
+      "dafd\n",
+      "koloawokd"
+    ],
+    "fragmentEntries": [
+      {
+        "answerNumber": 1,
+        "answer": "kotek",
+        "possibleAnswers":
+        ["płotek","kamiotek"]
+
+      },
+      {
+        "answerNumber": 2,
+        "answer": "kotek",
+        "possibleAnswers":
+        ["płotek","kamiotek"]
+
+      },
+      {
+        "answerNumber": 5,
+        "answer": "kotek",
+        "possibleAnswers":
+        ["płotek","kamiotek"]
+
+      },
+      {
+        "answerNumber": 4,
+        "answer": "kotek",
+        "possibleAnswers":
+        ["płotek","kamiotek"]
+
+      }
+    ]
+  },
+  {
+    "fragments": [
+      "adssasda",
+      "majonez kielecki",
+      "dafd\n",
+      "koloawokd"
+    ],
+    "fragmentEntries": [
+      {
+        "answerNumber": 1,
+        "answer": "kotek",
+        "possibleAnswers":
+        ["płotek","kamiotek"]
+
+      },
+      {
+        "answerNumber": 2,
+        "answer": "śmietana piątnica",
+        "possibleAnswers":
+        ["płotek","tomasz karolak"]
+
+      },
+      {
+        "answerNumber": 3,
+        "answer": "kotek",
+        "possibleAnswers":
+        ["wół","kamiotek"]
+
+      },
+      {
+        "answerNumber": 4,
+        "answer": "kotek",
+        "possibleAnswers":
+        ["płotek","piesek"]
+
+      }
+    ]
+  }
+]
