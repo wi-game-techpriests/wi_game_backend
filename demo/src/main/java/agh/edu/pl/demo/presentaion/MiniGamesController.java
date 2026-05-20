@@ -4,15 +4,15 @@ import agh.edu.pl.demo.services.AuthenticationService;
 import agh.edu.pl.demo.services.MiniGameService;
 import agh.edu.pl.demo.util.dto.ConnectionsDTO;
 import agh.edu.pl.demo.util.dto.FillInEntryDTO;
+import agh.edu.pl.demo.util.dto.PlayerSubmitDTO;
 import agh.edu.pl.demo.util.dto.WordSearchDTO;
 import agh.edu.pl.demo.util.exceptions.InvalidHeaderFormatException;
 import agh.edu.pl.demo.util.exceptions.MissingTokenException;
 import agh.edu.pl.demo.util.exceptions.PlayerNotAuthenticatedException;
+import io.jsonwebtoken.Claims;
 import org.springframework.http.HttpStatus;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.RequestHeader;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.*;
 import org.springframework.web.server.ResponseStatusException;
 
 
@@ -67,5 +67,18 @@ public class MiniGamesController {
             throw new ResponseStatusException(HttpStatus.UNAUTHORIZED);
         }
 
+    }
+
+    @PostMapping("/submit")
+    public ResponseEntity<?> submitScore(@RequestHeader(value = "Authorization", required = false) String authHeader,
+                                         @RequestBody PlayerSubmitDTO submitDTO){
+        try{
+            Claims claims = authenticationService.authenticatePlayer(authHeader);
+            miniGameService.submitScore(claims, submitDTO);
+
+            return ResponseEntity.ok("Score submitted");
+        }catch (MissingTokenException | InvalidHeaderFormatException | PlayerNotAuthenticatedException e){
+            throw new ResponseStatusException(HttpStatus.UNAUTHORIZED);
+        }
     }
 }

@@ -1,17 +1,15 @@
 package agh.edu.pl.demo.services;
 
-import agh.edu.pl.demo.model.ConnectionsCategory;
-import agh.edu.pl.demo.model.FillInAnswer;
-import agh.edu.pl.demo.model.FillInEntry;
-import agh.edu.pl.demo.model.WordSearchWord;
+import agh.edu.pl.demo.model.*;
 import agh.edu.pl.demo.repos.ConnectionsCategoryRepository;
 import agh.edu.pl.demo.repos.FillInEntryRepository;
+import agh.edu.pl.demo.repos.PlayerRepository;
 import agh.edu.pl.demo.repos.WordSearchWordRepository;
 import agh.edu.pl.demo.util.dto.*;
+import io.jsonwebtoken.Claims;
 import org.springframework.stereotype.Service;
 
 import java.util.ArrayList;
-import java.util.Collection;
 import java.util.Collections;
 import java.util.List;
 
@@ -21,10 +19,13 @@ public class MiniGameService {
     private final WordSearchWordRepository wordSearchRepository;
     private final FillInEntryRepository fillInRepository;
 
-    public MiniGameService(ConnectionsCategoryRepository connectionsRepository, WordSearchWordRepository wordSearchRepository, FillInEntryRepository fillInRepository) {
+    private final PlayerRepository playerRepository;
+
+    public MiniGameService(ConnectionsCategoryRepository connectionsRepository, WordSearchWordRepository wordSearchRepository, FillInEntryRepository fillInRepository, PlayerRepository playerRepository) {
         this.connectionsRepository = connectionsRepository;
         this.wordSearchRepository = wordSearchRepository;
         this.fillInRepository = fillInRepository;
+        this.playerRepository = playerRepository;
     }
 
 
@@ -86,6 +87,19 @@ public class MiniGameService {
 
 
         return new FillInEntryDTO(fillInEntry.getFragments(),answers);
+    }
+
+    public void submitScore(Claims claims, PlayerSubmitDTO submitDTO){
+        Long playerId = Long.parseLong(claims.getSubject());
+
+        Player player = playerRepository.findById(playerId).orElseThrow();
+
+        player.setConnectionsPoint(submitDTO.connectionsPoints());
+        player.setFillInPoints(submitDTO.fillInPoints());
+        player.setWordSearchPoints(submitDTO.wordSearchPoints());
+        player.setKahootPoints(submitDTO.kahootPoints());
+
+        playerRepository.save(player);
     }
 
 }

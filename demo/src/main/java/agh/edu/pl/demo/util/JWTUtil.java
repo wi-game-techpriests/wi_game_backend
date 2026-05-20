@@ -19,10 +19,6 @@ public class JWTUtil {
     @Value("${auth.secret:secret}")
     private static String secret="secret01secret02secret03secret04";
 
-    private JWTUtil() {
-        throw new IllegalStateException("Utility class");
-    }
-
 
     public static String generateToken(Player player){
         return Jwts.builder()
