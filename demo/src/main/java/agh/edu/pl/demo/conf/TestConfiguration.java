@@ -4,6 +4,8 @@ import agh.edu.pl.demo.model.Player;
 import agh.edu.pl.demo.model.Session;
 import agh.edu.pl.demo.repos.PlayerRepository;
 import agh.edu.pl.demo.repos.SessionRepository;
+import agh.edu.pl.demo.util.JWTUtil;
+import io.jsonwebtoken.Claims;
 import jakarta.annotation.PostConstruct;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.context.annotation.Profile;
@@ -25,11 +27,24 @@ public class TestConfiguration {
     private void init(){
         sessionRepository.deleteAll();
         playerRepository.deleteAll();
-        Session session = new Session(LocalDateTime.now(), LocalDateTime.now().plusHours(4));
-        Player player = new Player(session,"kotek");
+        Session session = new Session("Targi Pracy Kraków 2026", "ABCDEF", LocalDateTime.now(), LocalDateTime.now().plusHours(4));
+        Player player = new Player(session, "kotek");
+
+
+
         sessionRepository.save(session);
         session.getPlayers().add(player);
+
         playerRepository.save(player);
+        String token = JWTUtil.generateToken(player);
+
+        System.out.println("token: "+ token);
+        Claims claims = JWTUtil.parseToken(token);
+
+        System.out.println("id: "+claims.getSubject());
+        System.out.println("name: " + claims.get("name", String.class));
+        System.out.println("sessionId: "+claims.get("sessionId", Long.class));
+
         sessionRepository.save(session);
 
     }
