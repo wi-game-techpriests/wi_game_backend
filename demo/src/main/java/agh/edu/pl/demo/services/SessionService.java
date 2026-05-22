@@ -5,12 +5,17 @@ import agh.edu.pl.demo.model.Player;
 import agh.edu.pl.demo.model.Session;
 import agh.edu.pl.demo.repos.PlayerRepository;
 import agh.edu.pl.demo.repos.SessionRepository;
+import agh.edu.pl.demo.util.GameType;
+import agh.edu.pl.demo.util.dto.LeaderboardDTO;
+import agh.edu.pl.demo.util.dto.PlayerScoreDTO;
 import agh.edu.pl.demo.util.exceptions.PlayerAlreadyExistsException;
 import agh.edu.pl.demo.util.exceptions.SessionExpiredException;
 import agh.edu.pl.demo.util.exceptions.SessionNotFoundException;
+import io.jsonwebtoken.Claims;
 import org.springframework.stereotype.Service;
 
 import java.time.LocalDateTime;
+import java.util.Comparator;
 import java.util.List;
 import java.util.Random;
 import java.util.UUID;
@@ -80,5 +85,38 @@ public class SessionService {
         }
 
         return code.toString();
+    }
+
+    public LeaderboardDTO getLeaderBoard(Claims claims, GameType gameType){
+
+        Long playerId = Long.parseLong(claims.getSubject());
+        String playerName = claims.get("name", String.class);
+        Long sessionId = claims.get("sessionId", Long.class);
+
+        Session session = sessionRepository.findById(sessionId).orElseThrow();
+
+        List<PlayerScoreDTO> scores = session.getPlayers().stream()
+                .map(player ->{
+                    return switch(gameType){
+                        case CONNECTIONS -> new PlayerScoreDTO(player.getName(), player.getConnectionsPoint());
+                        case WORDSEARCH -> new PlayerScoreDTO(player.getName(), player.getWordSearchPoints());
+                        case FILLIN -> new PlayerScoreDTO(player.getName(), player.getFillInPoints());
+                        case KAHOOT -> new PlayerScoreDTO(player.getName(), player.getKahootPoints());
+                        case TOTAL -> new PlayerScoreDTO(player.getName(), player.getTotalPoints());
+                    };
+                })
+                .sorted(Comparator.comparingInt(PlayerScoreDTO::score).reversed())
+                .toList();
+
+        PlayerScoreDTO playerScore = scores.stream()
+                .filter(x -> x.name().equals(playerName))
+                .findFirst().orElseThrow();
+
+        int playerPosition = scores.indexOf(playerScore); // dać + 1? czy tak jak piętra w d17?
+
+
+
+
+        return new LeaderboardDTO(playerId, playerName, playerPosition, scores);
     }
 }

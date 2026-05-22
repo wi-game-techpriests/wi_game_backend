@@ -2,12 +2,16 @@ package agh.edu.pl.demo.presentaion;
 
 
 import agh.edu.pl.demo.model.Session;
+import agh.edu.pl.demo.services.AuthenticationService;
 import agh.edu.pl.demo.services.SessionService;
+import agh.edu.pl.demo.util.GameType;
+import agh.edu.pl.demo.util.dto.LeaderboardDTO;
 import agh.edu.pl.demo.util.dto.PlayerDTO;
 import agh.edu.pl.demo.util.dto.SessionDTO;
 import agh.edu.pl.demo.util.exceptions.PlayerAlreadyExistsException;
 import agh.edu.pl.demo.util.exceptions.SessionExpiredException;
 import agh.edu.pl.demo.util.exceptions.SessionNotFoundException;
+import io.jsonwebtoken.Claims;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
@@ -21,9 +25,11 @@ import java.util.List;
 public class SessionController {
 
     private final SessionService sessionService;
+    private final AuthenticationService authenticationService;
 
-    public SessionController(SessionService sessionService) {
+    public SessionController(SessionService sessionService, AuthenticationService authenticationService) {
         this.sessionService = sessionService;
+        this.authenticationService = authenticationService;
     }
 
     @GetMapping
@@ -71,6 +77,21 @@ public class SessionController {
             return ResponseEntity
                     .status(404)
                     .body("Session not found");
+        }
+    }
+
+
+    @GetMapping("/leaderboard")
+    public ResponseEntity<?> getLeaderboard(@RequestHeader(value = "Authorization", required = false) String authHeader,
+                                            @RequestParam GameType gameType){
+        try{
+            Claims claims = authenticationService.authenticatePlayer(authHeader);
+
+            LeaderboardDTO leaderboard = sessionService.getLeaderBoard(claims,gameType);
+
+            return ResponseEntity.ok(leaderboard);
+        }catch (Exception e){
+            return ResponseEntity.status(404).body("//TODO");
         }
     }
 }

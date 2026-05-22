@@ -96,4 +96,8 @@ public class Player {
         this.tokenId = tokenId;
     }
 
+    public int getTotalPoints(){
+        return connectionsPoint+kahootPoints+fillInPoints+wordSearchPoints;
+    }
+
 }
