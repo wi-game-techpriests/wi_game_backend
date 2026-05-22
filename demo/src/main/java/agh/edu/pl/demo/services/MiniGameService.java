@@ -1,10 +1,7 @@
 package agh.edu.pl.demo.services;
 
 import agh.edu.pl.demo.model.*;
-import agh.edu.pl.demo.repos.ConnectionsCategoryRepository;
-import agh.edu.pl.demo.repos.FillInEntryRepository;
-import agh.edu.pl.demo.repos.PlayerRepository;
-import agh.edu.pl.demo.repos.WordSearchWordRepository;
+import agh.edu.pl.demo.repos.*;
 import agh.edu.pl.demo.util.dto.*;
 import io.jsonwebtoken.Claims;
 import org.springframework.stereotype.Service;
@@ -18,13 +15,15 @@ public class MiniGameService {
     private final ConnectionsCategoryRepository connectionsRepository;
     private final WordSearchWordRepository wordSearchRepository;
     private final FillInEntryRepository fillInRepository;
+    private final KahootQuestionRepository kahootRepository;
 
     private final PlayerRepository playerRepository;
 
-    public MiniGameService(ConnectionsCategoryRepository connectionsRepository, WordSearchWordRepository wordSearchRepository, FillInEntryRepository fillInRepository, PlayerRepository playerRepository) {
+    public MiniGameService(ConnectionsCategoryRepository connectionsRepository, WordSearchWordRepository wordSearchRepository, FillInEntryRepository fillInRepository, KahootQuestionRepository kahootRepository, PlayerRepository playerRepository) {
         this.connectionsRepository = connectionsRepository;
         this.wordSearchRepository = wordSearchRepository;
         this.fillInRepository = fillInRepository;
+        this.kahootRepository = kahootRepository;
         this.playerRepository = playerRepository;
     }
 
@@ -87,6 +86,26 @@ public class MiniGameService {
 
 
         return new FillInEntryDTO(fillInEntry.getFragments(),answers);
+    }
+
+    public KahootDTO getKahoot(){
+        List<String> answerKeys = List.of("A","B","C","D");
+        String correctAnswerKey = "";
+        List<KahootAnswerDTO> kahootAnswers = new ArrayList<>();
+        KahootQuestion kahootQuestion = kahootRepository.randomKahootQuestion();
+
+        List<String> answers = new ArrayList<>(kahootQuestion.getOtherChoices());
+        Collections.shuffle(answers);
+        answers = answers.subList(0,3);
+        answers.add(kahootQuestion.getAnswer());
+        Collections.shuffle(answers);
+
+        for(int i = 0; i<4;i++){
+            kahootAnswers.add(new KahootAnswerDTO(answerKeys.get(i),answers.get(i)));
+            if(answers.get(i).equals(kahootQuestion.getAnswer())) correctAnswerKey = answerKeys.get(i);
+        }
+
+        return new KahootDTO(kahootQuestion.getQuestion(),correctAnswerKey,kahootAnswers);
     }
 
     public void submitScore(Claims claims, PlayerSubmitDTO submitDTO){

@@ -2,10 +2,7 @@ package agh.edu.pl.demo.presentaion;
 
 import agh.edu.pl.demo.services.AuthenticationService;
 import agh.edu.pl.demo.services.MiniGameService;
-import agh.edu.pl.demo.util.dto.ConnectionsDTO;
-import agh.edu.pl.demo.util.dto.FillInEntryDTO;
-import agh.edu.pl.demo.util.dto.PlayerSubmitDTO;
-import agh.edu.pl.demo.util.dto.WordSearchDTO;
+import agh.edu.pl.demo.util.dto.*;
 import agh.edu.pl.demo.util.exceptions.InvalidHeaderFormatException;
 import agh.edu.pl.demo.util.exceptions.MissingTokenException;
 import agh.edu.pl.demo.util.exceptions.PlayerNotAuthenticatedException;
@@ -63,6 +60,19 @@ public class MiniGamesController {
             authenticationService.authenticatePlayer(authHeader);
             FillInEntryDTO fillInEntry = miniGameService.getFillIn();
             return fillInEntry;
+        }catch (MissingTokenException | InvalidHeaderFormatException | PlayerNotAuthenticatedException e){
+            throw new ResponseStatusException(HttpStatus.UNAUTHORIZED);
+        }
+
+    }
+
+    @GetMapping("/kahoot")
+    public KahootDTO getKahoot(@RequestHeader(value = "Authorization", required = false) String authHeader){
+
+        try{
+            authenticationService.authenticatePlayer(authHeader);
+            KahootDTO kahoot = miniGameService.getKahoot();
+            return kahoot;
         }catch (MissingTokenException | InvalidHeaderFormatException | PlayerNotAuthenticatedException e){
             throw new ResponseStatusException(HttpStatus.UNAUTHORIZED);
         }
