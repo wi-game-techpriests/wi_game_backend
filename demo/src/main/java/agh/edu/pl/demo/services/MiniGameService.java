@@ -94,24 +94,33 @@ public class MiniGameService {
         return new FillInEntryDTO(fillInEntry.getFragments(),answers);
     }
 
-    public KahootDTO getKahoot(){
-        List<String> answerKeys = List.of("A","B","C","D");
-        String correctAnswerKey = "";
-        List<KahootAnswerDTO> kahootAnswers = new ArrayList<>();
-        KahootQuestion kahootQuestion = kahootRepository.randomKahootQuestion();
+    public List<KahootDTO> getKahoot(){
 
-        List<String> answers = new ArrayList<>(kahootQuestion.getOtherChoices());
-        Collections.shuffle(answers);
-        answers = answers.subList(0,3);
-        answers.add(kahootQuestion.getAnswer());
-        Collections.shuffle(answers);
+        List<KahootQuestion> kahootQuestions = kahootRepository.randomKahootQuestion();
+        List<KahootDTO> kahoots = new ArrayList<>();
 
-        for(int i = 0; i<4;i++){
-            kahootAnswers.add(new KahootAnswerDTO(answerKeys.get(i),answers.get(i)));
-            if(answers.get(i).equals(kahootQuestion.getAnswer())) correctAnswerKey = answerKeys.get(i);
+        for (KahootQuestion kahootQuestion:kahootQuestions) {
+            List<String> answerKeys = List.of("A", "B", "C", "D");
+            String correctAnswerKey = "";
+            List<KahootAnswerDTO> kahootAnswers = new ArrayList<>();
+
+
+            List<String> answers = new ArrayList<>(kahootQuestion.getOtherChoices());
+            Collections.shuffle(answers);
+            answers = answers.subList(0, 3);
+            answers.add(kahootQuestion.getAnswer());
+            Collections.shuffle(answers);
+
+            for (int i = 0; i < 4; i++) {
+                kahootAnswers.add(new KahootAnswerDTO(answerKeys.get(i), answers.get(i)));
+                if (answers.get(i).equals(kahootQuestion.getAnswer())) correctAnswerKey = answerKeys.get(i);
+            }
+
+            kahoots.add(new KahootDTO(kahootQuestion.getQuestion(),correctAnswerKey,kahootAnswers));
+
         }
 
-        return new KahootDTO(kahootQuestion.getQuestion(),correctAnswerKey,kahootAnswers);
+        return kahoots;
     }
 
     public void submitScore(Claims claims, PlayerSubmitDTO submitDTO){
@@ -185,7 +194,7 @@ public class MiniGameService {
         }
 
         try{
-            File jsonFile = new File("src/main/resources/kahoot_test.json");
+            File jsonFile = new File("src/main/resources/kahoot.json");
 
             List<KahootQuestion> questions =
                     objectMapper.readValue(jsonFile, new TypeReference<List<KahootQuestion>>(){});

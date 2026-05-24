@@ -7,7 +7,7 @@ import agh.edu.pl.demo.repos.PlayerRepository;
 import agh.edu.pl.demo.repos.SessionRepository;
 import agh.edu.pl.demo.services.MiniGameService;
 import jakarta.annotation.PostConstruct;
-import jdk.internal.org.jline.reader.History;
+
 import org.springframework.context.annotation.Configuration;
 
 import java.time.LocalDateTime;
