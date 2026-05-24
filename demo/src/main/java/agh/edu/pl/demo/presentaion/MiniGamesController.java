@@ -12,6 +12,8 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.server.ResponseStatusException;
 
+import java.io.IOException;
+
 
 @RestController
 @RequestMapping(path = "game")
@@ -90,5 +92,18 @@ public class MiniGamesController {
         }catch (MissingTokenException | InvalidHeaderFormatException | PlayerNotAuthenticatedException e){
             throw new ResponseStatusException(HttpStatus.UNAUTHORIZED);
         }
+    }
+
+    @PutMapping("/reload")
+    public ResponseEntity<?> relaodContent(){
+
+        try {
+            miniGameService.reloadContent();
+            return ResponseEntity.ok("content reloaded");
+        } catch (IOException e) {
+            throw new RuntimeException(e);
+        }
+
+
     }
 }

@@ -5,7 +5,11 @@ import agh.edu.pl.demo.repos.*;
 import agh.edu.pl.demo.util.dto.*;
 import io.jsonwebtoken.Claims;
 import org.springframework.stereotype.Service;
+import tools.jackson.core.type.TypeReference;
+import tools.jackson.databind.ObjectMapper;
 
+import java.io.File;
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
@@ -18,13 +22,15 @@ public class MiniGameService {
     private final KahootQuestionRepository kahootRepository;
 
     private final PlayerRepository playerRepository;
+    private final ObjectMapper objectMapper;
 
-    public MiniGameService(ConnectionsCategoryRepository connectionsRepository, WordSearchWordRepository wordSearchRepository, FillInEntryRepository fillInRepository, KahootQuestionRepository kahootRepository, PlayerRepository playerRepository) {
+    public MiniGameService(ConnectionsCategoryRepository connectionsRepository, WordSearchWordRepository wordSearchRepository, FillInEntryRepository fillInRepository, KahootQuestionRepository kahootRepository, PlayerRepository playerRepository, ObjectMapper objectMapper) {
         this.connectionsRepository = connectionsRepository;
         this.wordSearchRepository = wordSearchRepository;
         this.fillInRepository = fillInRepository;
         this.kahootRepository = kahootRepository;
         this.playerRepository = playerRepository;
+        this.objectMapper = objectMapper;
     }
 
 
@@ -119,6 +125,78 @@ public class MiniGameService {
         player.setKahootPoints(submitDTO.kahootPoints());
 
         playerRepository.save(player);
+    }
+
+    public void reloadContent() throws IOException {
+        connectionsRepository.deleteAll();
+        wordSearchRepository.deleteAll();
+        fillInRepository.deleteAll();
+        kahootRepository.deleteAll();
+
+        try{
+            File jsonFile = new File("src/main/resources/connections.json");
+
+            List<ConnectionsCategory> connectionsCategories =
+                    objectMapper.readValue(jsonFile, new TypeReference<List<ConnectionsCategory>>(){});
+
+
+            connectionsRepository.saveAll(connectionsCategories);
+        } catch (Exception e){
+            e.printStackTrace();
+            throw new IOException();
+        }
+
+        try{
+            File jsonFile = new File("src/main/resources/wordsearch.json");
+
+            List<WordSearchWord> words =
+                    objectMapper.readValue(jsonFile, new TypeReference<List<WordSearchWord>>(){});
+
+
+            wordSearchRepository.saveAll(words);
+
+
+        } catch (Exception e){
+            e.printStackTrace();
+            throw new IOException();
+        }
+
+        try{
+            File jsonFile = new File("src/main/resources/fillin_test.json");
+
+            List<FillInEntry> fillInEntries =
+                    objectMapper.readValue(jsonFile, new TypeReference<List<FillInEntry>>(){});
+
+
+            for (FillInEntry entry : fillInEntries) {
+                if (entry.getFragmentEntries() != null) {
+                    for (FillInAnswer answer : entry.getFragmentEntries()) {
+                        answer.setParentEntry(entry);
+                    }
+                }
+            }
+
+            fillInRepository.saveAll(fillInEntries);
+
+
+        } catch (Exception e){
+            e.printStackTrace();
+            throw new IOException();
+        }
+
+        try{
+            File jsonFile = new File("src/main/resources/kahoot_test.json");
+
+            List<KahootQuestion> questions =
+                    objectMapper.readValue(jsonFile, new TypeReference<List<KahootQuestion>>(){});
+
+
+            kahootRepository.saveAll(questions);
+
+
+        } catch (Exception e){
+            e.printStackTrace();
+        }
     }
 
 }

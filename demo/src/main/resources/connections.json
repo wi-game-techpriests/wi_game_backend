@@ -1,0 +1,34 @@
+[
+  {
+    "category": "Algorytmy grafowe",
+    "words": ["BFS","DFS","Dijkstra","Bellman-Ford","Floyd-Warshall","Kruskal", "Prima"]
+  },
+  {
+    "category": "Algorytmy sortowania",
+    "words": ["bogo","radix","bucket","merge","bubble","quick","stalin","heap"]
+  },
+  {
+    "category": "Struktury danych",
+    "words": ["kolejka","stos","sterta","deque","stack","drzewo", "graf"]
+  },
+  {
+    "category": "Matematycy z twierdzeń, prześmiewczo",
+    "words": ["derby","kebab rollo","la garaż","szpital","taylor swift","McLaren"]
+  },
+  {
+    "category": "Maskotki dla IT nerdów",
+    "words": ["Ferris","elephpant","Kodee","Gopher","Keith","Octocat", "Slonik", "Tux"]
+  },
+  {
+    "category": "Długość tablicy",
+    "words": ["sizeof(a)/sizeof(a[0])",".Lenght",".length",".size()","length()","len()", "length","write(*[])",".size","COUNT()"]
+  },
+  {
+    "category": "Immiennicy języków programowania",
+    "words": ["Blaise","Lovelace","Curry","Keczup"]
+  },
+  {
+    "category": "Typy numeryczne w C",
+    "words": ["int","float","double","long","short"]
+  }
+]
