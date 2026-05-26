@@ -13,6 +13,7 @@ import agh.edu.pl.demo.util.exceptions.SessionExpiredException;
 import agh.edu.pl.demo.util.exceptions.SessionNotFoundException;
 import io.jsonwebtoken.Claims;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.time.LocalDateTime;
 import java.util.Comparator;
@@ -87,6 +88,7 @@ public class SessionService {
         return code.toString();
     }
 
+    @Transactional
     public LeaderboardDTO getLeaderBoard(Claims claims, GameType gameType){
 
         Long playerId = Long.parseLong(claims.getSubject());

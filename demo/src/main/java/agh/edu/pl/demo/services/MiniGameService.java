@@ -5,6 +5,7 @@ import agh.edu.pl.demo.repos.*;
 import agh.edu.pl.demo.util.dto.*;
 import io.jsonwebtoken.Claims;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 import tools.jackson.core.type.TypeReference;
 import tools.jackson.databind.ObjectMapper;
 
@@ -123,6 +124,7 @@ public class MiniGameService {
         return kahoots;
     }
 
+    @Transactional
     public void submitScore(Claims claims, PlayerSubmitDTO submitDTO){
         Long playerId = Long.parseLong(claims.getSubject());
 
