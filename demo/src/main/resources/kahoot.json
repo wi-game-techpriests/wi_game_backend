@@ -1,0 +1,163 @@
+[
+  {
+    "question": "S w SOLID to:",
+    "answer": "Single responsibility",
+    "otherChoices": [
+      "Source control",
+      "Selective usage",
+      "Simple",
+      "Separation"
+    ]
+  },
+  {
+    "question": "O w SOLID to:",
+    "answer": "Open/closed",
+    "otherChoices": [
+      "Object oriented",
+      "Operation scale",
+      "Output control",
+      "Optimization"
+    ]
+  },
+  {
+    "question": "L w SOLID to:",
+    "answer": "Liskov substitution",
+    "otherChoices": [
+      "Logical structure",
+      "Layered architecture",
+      "Linear processing",
+      "Lambda expression"
+    ]
+  },
+  {
+    "question": "I w SOLID to:",
+    "answer": "Interface segregation",
+    "otherChoices": [
+      "Information hiding",
+      "Inheritance control",
+      "Implementation detail",
+      "Inversion of control"
+    ]
+  },
+  {
+    "question": "D w SOLID to:",
+    "answer": "Dependency inversion",
+    "otherChoices": [
+      "Data driven",
+      "Domain model",
+      "Dynamic binding",
+      "Decomposition"
+    ]
+  },
+  {
+    "question": "A w ACID to:",
+    "answer": "Atomicity",
+    "otherChoices": [
+      "Availability",
+      "Aggregation",
+      "Authentication",
+      "Abstraction"
+    ]
+  },
+  {
+    "question": "C w ACID to:",
+    "answer": "Consistency",
+    "otherChoices": [
+      "Concurrency",
+      "Concurrency control",
+      "Caching",
+      "Compression"
+    ]
+  },
+  {
+    "question": "I w ACID to:",
+    "answer": "Isolation",
+    "otherChoices": [
+      "Idempotency",
+      "Indexing",
+      "Inheritance",
+      "Integration"
+    ]
+  },
+  {
+    "question": "D w ACID to:",
+    "answer": "Durability",
+    "otherChoices": [
+      "Distribution",
+      "Deadlock prevention",
+      "Data integrity",
+      "Decryption"
+    ]
+  },
+  {
+    "question": "C w CRUD to:",
+    "answer": "Create",
+    "otherChoices": [
+      "Compile",
+      "Commit",
+      "Cache",
+      "Command"
+    ]
+  },
+  {
+    "question": "R w CRUD to:",
+    "answer": "Read",
+    "otherChoices": [
+      "Render",
+      "Replace",
+      "Redirect",
+      "Rollback"
+    ]
+  },
+  {
+    "question": "U w CRUD to:",
+    "answer": "Update",
+    "otherChoices": [
+      "Upload",
+      "Unlink",
+      "Upgrade",
+      "Undo"
+    ]
+  },
+  {
+    "question": "D w CRUD to:",
+    "answer": "Delete",
+    "otherChoices": [
+      "Drop",
+      "Disconnect",
+      "Deploy",
+      "Debug"
+    ]
+  },
+  {
+    "question": "R w REST to:",
+    "answer": "Representational",
+    "otherChoices": [
+      "Relational",
+      "Responsive",
+      "Redundant",
+      "Routing"
+    ]
+  },
+  {
+    "question": "T w REST to:",
+    "answer": "Transfer",
+    "otherChoices": [
+      "TCP",
+      "Technology",
+      "Termination",
+      "Topology"
+    ]
+  },
+  {
+    "question": "S w REST to:",
+    "answer": "State",
+    "otherChoices": [
+      "Server",
+      "Security",
+      "Session",
+      "Syntax"
+    ]
+  }
+
+]

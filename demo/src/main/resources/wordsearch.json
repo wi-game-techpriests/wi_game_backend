@@ -1,0 +1,122 @@
+[
+  {
+    "word": "lua",
+    "wordLength": 3
+  },
+  {
+    "word": "scala",
+    "wordLength": 5
+  },
+  {
+    "word": "golang",
+    "wordLength": 6
+  },
+  {
+    "word": "java",
+    "wordLength": 4
+  },
+  {
+    "word": "nullptr",
+    "wordLength": 7
+  },
+  {
+    "word": "oracle",
+    "wordLength": 6
+  },
+  {
+    "word": "monada",
+    "wordLength": 6
+  },
+    {
+    "word": "gcc",
+    "wordLength": 3
+  },
+  {
+    "word": "rust",
+    "wordLength": 4
+  },
+  {
+    "word": "pascal",
+    "wordLength": 6
+  },
+  {
+    "word": "sqlite",
+    "wordLength": 6
+  },
+  {
+    "word": "mongodb",
+    "wordLength": 6
+  },
+  {
+    "word": "http",
+    "wordLength": 4
+  },
+  {
+    "word": "rest",
+    "wordLength": 4
+  },
+  {
+    "word": "crud",
+    "wordLength": 4
+  },
+  {
+    "word": "class",
+    "wordLength": 5
+  },
+  {
+    "word": "haskell",
+    "wordLength": 6
+  },
+  {
+    "word": "fortran",
+    "wordLength": 7
+  },
+  {
+    "word": "python",
+    "wordLength": 6
+  },
+  {
+    "word": "linux",
+    "wordLength": 5
+  },
+  {
+    "word": "thread",
+    "wordLength": 6
+  },
+  {
+    "word": "unix",
+    "wordLength": 4
+  },
+  {
+    "word": "posix",
+    "wordLength": 5
+  },
+  {
+    "word": "fpga",
+    "wordLength": 4
+  },
+  {
+    "word": "verilog",
+    "wordLength": 7
+  },
+  {
+    "word": "nand",
+    "wordLength": 4
+  },
+  {
+    "word": "xor",
+    "wordLength": 3
+  },
+  {
+    "word": "fork",
+    "wordLength": 4
+  },
+  {
+    "word": "github",
+    "wordLength": 6
+  },
+  {
+    "word": "gitlab",
+    "wordLength": 6
+  }
+]
