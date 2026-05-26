@@ -1,0 +1,44 @@
+[
+  {
+    "fragments": [
+      "Dla zdefiniowanego poniżej typu drzewiastego, uzupełnij funkcję path tak, by zwracała listę ścieżek w dół\n",
+      "data Tree a = Node a (Tree a) (Tree a) \n \t| Leaf\n",
+      "paths :: Tree a -> [[a]]\n",
+      "paths Leaf = ",
+      "\n paths (Node a lt rt) = concat $ ([(a:)] ",
+      " ) ",
+      " (",
+      " [lt, rt])"
+    ],
+    "fragmentEntries": [
+      {
+        "answerNumber": 4,
+        "answer": "pure []",
+        "possibleAnswers":
+        ["[pure]","[]","fmap []"]
+
+      },
+      {
+        "answerNumber": 5,
+        "answer": "<$>",
+        "possibleAnswers":
+        ["*>","`pure`","`fmap`","<*>","<*"]
+
+      },
+      {
+        "answerNumber": 6,
+        "answer": "<*>",
+        "possibleAnswers":
+        ["<$>","`pure`",">>=","<*","*>","<$"]
+
+      },
+      {
+        "answerNumber": 7,
+        "answer": "fmap paths",
+        "possibleAnswers":
+        ["paths","path *>","paths <*>","paths <$"]
+
+      }
+    ]
+  }
+]

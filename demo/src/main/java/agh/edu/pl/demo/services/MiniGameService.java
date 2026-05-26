@@ -171,7 +171,7 @@ public class MiniGameService {
         }
 
         try{
-            File jsonFile = new File("src/main/resources/fillin_test.json");
+            File jsonFile = new File("src/main/resources/fillin.json");
 
             List<FillInEntry> fillInEntries =
                     objectMapper.readValue(jsonFile, new TypeReference<List<FillInEntry>>(){});
