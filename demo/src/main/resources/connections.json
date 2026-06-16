@@ -1,7 +1,7 @@
 [
   {
     "category": "Algorytmy grafowe",
-    "words": ["BFS","DFS","Dijkstra","Bellman-Ford","Floyd-Warshall","Kruskal", "Prima"]
+    "words": ["BFS","DFS","Dijkstra","Bellman-\n-Ford","Floyd-\n-Warshall","Kruskal", "Prima"]
   },
   {
     "category": "Algorytmy sortowania",
@@ -21,7 +21,7 @@
   },
   {
     "category": "Długość tablicy",
-    "words": ["sizeof(a)/sizeof(a[0])",".Lenght",".length",".size()","length()","len()", "length","write(*[])",".size","COUNT()"]
+    "words": ["sizeof(a)/\nsizeof(a[0])",".Lenght",".length",".size()","length()","len()", "length","write(*[])",".size","COUNT()"]
   },
   {
     "category": "Immiennicy języków programowania",
