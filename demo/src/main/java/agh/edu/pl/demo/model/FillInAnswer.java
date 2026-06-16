@@ -24,6 +24,7 @@ public class FillInAnswer {
     @ManyToOne
     @JoinColumn(name = "parent_entry_id")
     @JsonBackReference
+    @JsonIgnore
     private FillInEntry parentEntry;
 
     public FillInAnswer() {
