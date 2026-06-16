@@ -1,5 +1,6 @@
 package agh.edu.pl.demo.model;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
 
 import java.util.List;
@@ -9,6 +10,7 @@ import java.util.List;
 public class ConnectionsCategory {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @JsonIgnore
     private Long id;
 
     private String category;
