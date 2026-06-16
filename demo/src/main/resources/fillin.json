@@ -1,43 +1,94 @@
 [
   {
     "fragments": [
-      "Dla zdefiniowanego poniżej typu drzewiastego, uzupełnij funkcję path tak, by zwracała listę ścieżek w dół\n",
-      "data Tree a = Node a (Tree a) (Tree a) \n \t| Leaf\n",
-      "paths :: Tree a -> [[a]]\n",
-      "paths Leaf = ",
-      "\n paths (Node a lt rt) = concat $ ([(a:)] ",
-      " ) ",
-      " (",
-      " [lt, rt])"
+      "Uzupełnij funkcję liczącą średnią listy",
+      "def avg(<SLOT>):\n    result <SLOT>\n    for <SLOT> in tab:\n        result <SLOT>\n    result <SLOT>\n    return result"
     ],
     "fragmentEntries": [
       {
+        "answerNumber": 0,
+        "answer": "tab",
+        "possibleAnswers": [
+          "len(tab)"
+        ]
+      },
+      {
+        "answerNumber": 1,
+        "answer": "= 0",
+        "possibleAnswers": [
+          "= 1",
+          "= -1"
+        ]
+      },
+      {
+        "answerNumber": 2,
+        "answer": "n",
+        "possibleAnswers": [
+          "int",
+          "def"
+        ]
+      },
+      {
+        "answerNumber": 3,
+        "answer": "+= n",
+        "possibleAnswers": [
+          "-= n",
+          "= n"
+        ]
+      },
+      {
         "answerNumber": 4,
-        "answer": "pure []",
-        "possibleAnswers":
-        ["[pure]","[]","fmap []"]
-
+        "answer": "/= len(tab)",
+        "possibleAnswers": [
+          "= len(tab)",
+          "*= len(tab)"
+        ]
+      }
+    ]
+  },
+  {
+    "fragments": [
+      "Uzupełnij kod wypisujący liczby z ciągu Fibonacciego mniejsze od miliona",
+      "l0 = <SLOT>\nl1 = <SLOT>\nwhile True:\n    l2 = <SLOT>\n    if(<SLOT> > 1000000): break\n    print(l0)\n    l0,l1 = <SLOT>"
+    ],
+    "fragmentEntries": [
+      {
+        "answerNumber": 0,
+        "answer": "1",
+        "possibleAnswers": [
+          "2"
+        ]
       },
       {
-        "answerNumber": 5,
-        "answer": "<$>",
-        "possibleAnswers":
-        ["*>","`pure`","`fmap`","<*>","<*"]
-
+        "answerNumber": 1,
+        "answer": "1",
+        "possibleAnswers": [
+          "-1", "2"
+        ]
       },
       {
-        "answerNumber": 6,
-        "answer": "<*>",
-        "possibleAnswers":
-        ["<$>","`pure`",">>=","<*","*>","<$"]
-
+        "answerNumber": 2,
+        "answer": "l0+l1",
+        "possibleAnswers": [
+          "l0*l1",
+          "l0-l1"
+        ]
       },
       {
-        "answerNumber": 7,
-        "answer": "fmap paths",
-        "possibleAnswers":
-        ["paths","path *>","paths <*>","paths <$"]
-
+        "answerNumber": 3,
+        "answer": "l0",
+        "possibleAnswers": [
+          "l1",
+          "l2"
+        ]
+      },
+      {
+        "answerNumber": 4,
+        "answer": "l1,l2",
+        "possibleAnswers": [
+          "l0,l1",
+          "l2,l0"
+        ]
       }
     ]
   }

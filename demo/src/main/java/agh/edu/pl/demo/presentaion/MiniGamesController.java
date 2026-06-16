@@ -1,5 +1,9 @@
 package agh.edu.pl.demo.presentaion;
 
+import agh.edu.pl.demo.model.ConnectionsCategory;
+import agh.edu.pl.demo.model.FillInEntry;
+import agh.edu.pl.demo.model.KahootQuestion;
+import agh.edu.pl.demo.model.WordSearchWord;
 import agh.edu.pl.demo.services.AuthenticationService;
 import agh.edu.pl.demo.services.MiniGameService;
 import agh.edu.pl.demo.util.dto.*;
@@ -106,5 +110,47 @@ public class MiniGamesController {
         }
 
 
+    }
+
+
+    @PutMapping("/add/connections")
+    public ResponseEntity<?> addConnections(@RequestBody ConnectionsCategory newConnections){
+        try {
+            miniGameService.addConnections(newConnections);
+            return ResponseEntity.ok("content added");
+        } catch (Exception e) {
+            throw new ResponseStatusException(HttpStatus.BAD_REQUEST);
+        }
+
+    }
+
+    @PutMapping("/add/wordsearch")
+    public ResponseEntity<?> addWordSearch(@RequestBody WordSearchWord newWord){
+        try {
+            miniGameService.addWordSearch(newWord);
+        return ResponseEntity.ok("content added");
+    } catch (Exception e) {
+        throw new ResponseStatusException(HttpStatus.BAD_REQUEST);
+    }
+    }
+
+    @PutMapping("/add/fill_in")
+    public ResponseEntity<?> addFillIn(@RequestBody FillInEntry newFillIn){
+        try {
+            miniGameService.addFillIn(newFillIn);
+            return ResponseEntity.ok("content added");
+        } catch (Exception e) {
+            throw new ResponseStatusException(HttpStatus.BAD_REQUEST);
+        }
+    }
+
+    @PutMapping("/add/kahoot")
+    public ResponseEntity<?> addKahoot(@RequestBody KahootQuestion newKahoot){
+        try {
+            miniGameService.addKahoot(newKahoot);
+            return ResponseEntity.ok("content added");
+        } catch (Exception e) {
+            throw new ResponseStatusException(HttpStatus.BAD_REQUEST);
+        }
     }
 }

@@ -210,4 +210,52 @@ public class MiniGameService {
         }
     }
 
+    public void addConnections(ConnectionsCategory newConnections) throws  IOException{
+        if(newConnections.getWords().size()<4) throw new IOException();
+        if(!validString(newConnections.getCategory())) throw  new IOException();
+        for(String word: newConnections.getWords()){
+            if(!validString(word)) throw  new IOException();
+        }
+
+        connectionsRepository.save(newConnections);
+    }
+
+    public void addWordSearch(WordSearchWord newWord)throws  IOException{
+        if(!validString(newWord.getWord())) throw  new IOException();
+        wordSearchRepository.save(newWord);
+    }
+
+    public void addFillIn(FillInEntry entry)throws  IOException {
+        if(entry.getFragments().size()<2) throw new IOException();
+        for(String fragment: entry.getFragments())
+            if(!validString(fragment)) throw new IOException();
+
+        if (entry.getFragmentEntries() != null) {
+            for (FillInAnswer answer : entry.getFragmentEntries()) {
+                if(answer.getPossibleAnswers().isEmpty()) throw new IOException();
+                for (String a: answer.getPossibleAnswers())
+                    if(!validString(a)) throw new IOException();
+                if(!validString(answer.getAnswer())) throw new IOException();
+                answer.setParentEntry(entry);
+            }
+        } else throw new IOException();
+
+        fillInRepository.save(entry);
+    }
+
+    public void addKahoot(KahootQuestion newKahoot)throws  IOException{
+        if(!validString(newKahoot.getAnswer())) throw new IOException();
+        if(!validString(newKahoot.getQuestion())) throw new IOException();
+        if(newKahoot.getOtherChoices().size()<3) throw new IOException();
+        for(String choice: newKahoot.getOtherChoices())
+            if(!validString(choice)) throw new IOException();
+        kahootRepository.save(newKahoot);
+    }
+
+
+    private boolean validString(String string){
+        if(string==null) return false;
+        if(string.isEmpty()) return false;
+        return true;
+    }
 }
